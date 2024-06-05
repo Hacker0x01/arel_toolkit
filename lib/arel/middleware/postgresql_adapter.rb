@@ -38,20 +38,20 @@ module Arel
         end
       end
 
-      def exec_no_cache(sql, name, binds, async: false)
+      def exec_no_cache(sql, name, binds, async: false, **additional_arguments)
         Arel::Middleware.current_chain.execute(sql, binds) do |processed_sql, processed_binds|
           Arel::Middleware::Result.create(
-            data: super(processed_sql, name, processed_binds, async: async),
+            data: super(processed_sql, name, processed_binds, async: async, **additional_arguments),
             from: Arel::Middleware::PGResult,
             to: Arel::Middleware::PGResult,
           )
         end
       end
 
-      def exec_cache(sql, name, binds, async: false)
+      def exec_cache(sql, name, binds, async: false, **additional_arguments)
         Arel::Middleware.current_chain.execute(sql, binds) do |processed_sql, processed_binds|
           Arel::Middleware::Result.create(
-            data: super(processed_sql, name, processed_binds, async: async),
+            data: super(processed_sql, name, processed_binds, async: async, **additional_arguments),
             from: Arel::Middleware::PGResult,
             to: Arel::Middleware::PGResult,
           )
