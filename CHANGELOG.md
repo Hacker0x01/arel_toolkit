@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.7.0](https://github.com/mvgijssel/arel_toolkit/tree/v0.7.0) (2023-06-05)
+
+[Full Changelog](https://github.com/mvgijssel/arel_toolkit/compare/v0.6.0...v0.7.0)
+
+**Implemented enhancements:**
+
+- ActiveRecord 7.1 support
+
 ## [v0.6.0](https://github.com/mvgijssel/arel_toolkit/tree/v0.6.0) (2023-04-17)
 
 [Full Changelog](https://github.com/mvgijssel/arel_toolkit/compare/v0.5.0...v0.6.0)
