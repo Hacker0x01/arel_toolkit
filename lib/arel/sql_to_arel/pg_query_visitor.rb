@@ -777,7 +777,7 @@ module Arel
       def visit_String(attribute, context = nil)
         case context
         when :operator
-          attribute.str
+          attribute.sval
         when :const
           Arel::Nodes.build_quoted attribute.str
         else
