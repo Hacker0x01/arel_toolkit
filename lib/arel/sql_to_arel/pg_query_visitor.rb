@@ -38,7 +38,11 @@ module Arel
       end
 
       def visit_A_Const(attribute)
-        visit(attribute.val, :const)
+        if attribute.val.nil?
+          visit_Null(attribute)
+        else
+          visit(attribute.send(attribute.val), :const)
+        end
       end
 
       def visit_A_Expr(attribute)
@@ -172,7 +176,7 @@ module Arel
       end
 
       def visit_BitString(attribute)
-        Arel::Nodes::BitString.new(attribute.str)
+        Arel::Nodes::BitString.new(attribute.bsval)
       end
 
       def visit_BoolExpr(attribute, context = false)
@@ -194,6 +198,10 @@ module Arel
         else
           result
         end
+      end
+
+      def visit_Boolean(attribute)
+        attribute.boolval ? Arel::Nodes::True.new : Arel::Nodes::False.new
       end
 
       def visit_BooleanTest(attribute)
@@ -298,7 +306,7 @@ module Arel
       end
 
       def visit_Float(attribute)
-        Arel::Nodes::SqlLiteral.new attribute.str
+        Arel::Nodes::SqlLiteral.new attribute.fval
       end
 
       # https://github.com/postgres/postgres/blob/REL_10_1/src/include/nodes/parsenodes.h
@@ -682,6 +690,10 @@ module Arel
                 value
               when Arel::Nodes::Quoted
                 value.value
+              when Arel::Nodes::True
+                true
+              when Arel::Nodes::False
+                false
               else
                 boom "Unknown value `#{value}`"
               end
@@ -777,9 +789,9 @@ module Arel
       def visit_String(attribute, context = nil)
         case context
         when :operator
-          attribute.str
+          attribute.sval
         when :const
-          Arel::Nodes.build_quoted attribute.str
+          Arel::Nodes.build_quoted attribute.sval
         else
           "\"#{attribute}\""
         end

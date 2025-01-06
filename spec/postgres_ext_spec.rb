@@ -28,7 +28,7 @@ if Gem.loaded_specs.key?('postgres_ext')
 
     it 'works for Score.with CTE' do
       game = Game.create!
-      score = Score.create! game: game
+      score = Score.create!(game: game)
       _other_score = Score.create! game: Game.create!
       query = Score
         .with(my_games: Game.where(id: game))
@@ -52,7 +52,7 @@ if Gem.loaded_specs.key?('postgres_ext')
       Arel.middleware.apply([PostgresExtMiddleware]) do
         game = Game.create!
         user = User.create!
-        score = Score.create! game: game, user: user
+        score = Score.create!(game: game, user: user)
         _other_score = Score.create! game: Game.create!, user: User.create!
         query = Score.from_cte('scores_for_game', Score.where(game_id: game)).where(user_id: user)
 
