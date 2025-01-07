@@ -59,7 +59,7 @@ describe Arel::Transformer::PrefixSchemaName do
       prefixed_sql = transformer.call(arel.first, next_middleware).to_sql
 
       expect(prefixed_sql).to eq(
-        'SELECT "posts"."id" FROM "secret"."posts" INNER JOIN "public"."users" ON \'t\'::bool',
+        'SELECT "posts"."id" FROM "secret"."posts" INNER JOIN "public"."users" ON TRUE',
       )
     end
 

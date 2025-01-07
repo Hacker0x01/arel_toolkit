@@ -27,12 +27,14 @@ Gem::Specification.new do |spec|
   spec.extensions    = ['ext/pg_result_init/extconf.rb']
 
   spec.add_dependency 'activerecord', '>= 6.1', '< 7'
-  spec.add_dependency 'pg', '>= 1.1.4'
-  spec.add_dependency 'pg_query', '~> 2.2'
+  spec.add_dependency 'pg', '>= 1.5.9'
+  spec.add_dependency 'pg_query', '~> 5.1'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'dpl', '~> 1.10.11'
   spec.add_development_dependency 'github_changelog_generator', '~> 1.15'
+  spec.add_development_dependency 'nio4r', '= 2.7.0'
+  spec.add_development_dependency 'nokogiri', '= 1.16.8'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rake-compiler', '~> 1.0'
   spec.add_development_dependency 'rspec', '~> 3.8'
