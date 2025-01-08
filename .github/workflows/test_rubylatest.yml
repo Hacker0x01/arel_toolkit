@@ -30,7 +30,7 @@ jobs:
         bundler-cache: true
         bundler: default
         ruby-version: '3.2'
-    - run: bundle exec appraisal install
+    - run: bundle install
     - name: Compile extension
       run: |
         bundle exec rake clean
