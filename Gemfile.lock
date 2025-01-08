@@ -23,10 +23,6 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ansi (1.5.0)
-    appraisal (2.4.1)
-      bundler
-      rake
-      thor (>= 0.14.0)
     approvals (0.0.26)
       json (~> 2.0)
       nokogiri (~> 1.8)
@@ -231,7 +227,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  appraisal (~> 2.4.1)
   approvals (~> 0.0.24)
   arel_toolkit!
   bundler (~> 2.0)
@@ -243,8 +238,6 @@ DEPENDENCIES
   guard-rspec (~> 4.7)
   guard-rubocop (~> 1.5.0)
   memory_profiler (~> 0.9)
-  nio4r (= 2.7.0)
-  nokogiri (= 1.16.8)
   pry
   pry-alias
   pry-doc
