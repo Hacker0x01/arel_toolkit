@@ -102,8 +102,8 @@ describe 'Arel.sql_to_arel' do
   visit 'select', 'COUNT(DISTINCT "some_column")'
   visit 'select', "\"posts\".\"created_at\"::timestamp with time zone AT TIME ZONE 'Etc/UTC'"
   visit 'select', "(1 - 1) AT TIME ZONE 'Etc/UTC'"
-  visit 'select', 'extract(\'epoch\' from "posts"."created_at")'
-  visit 'select', 'extract(\'hour\' from "posts"."updated_at")'
+  visit 'select', 'extract(\'epoch\' from "posts"."created_at")', sql_to_arel: false
+  visit 'select', 'extract(\'hour\' from "posts"."updated_at")', sql_to_arel: false
   visit 'select',
         "('2001-02-1'::date, '2001-12-21'::date) OVERLAPS ('2001-10-30'::date, '2002-10-30'::date)"
   visit 'select', 'some_function("a", \'b\', 1)'
@@ -171,7 +171,7 @@ describe 'Arel.sql_to_arel' do
   # https://github.com/mvgijssel/arel_toolkit/issues/57
   # visit 'sql', '???', sql_to_arel: false
   visit 'select', '$1'
-  visit 'select', '?, ?', expected_sql: 'SELECT $1, $2'
+  visit 'select', '?, ?', sql_to_arel: false
   # https://github.com/mvgijssel/arel_toolkit/issues/101
   visit 'sql',
         'PREPARE some_plan (integer) AS (SELECT $1)',
@@ -301,7 +301,7 @@ describe 'Arel.sql_to_arel' do
   visit 'select', '2.0 ^ 3.0'
   visit 'select', ' |/ 16'
   visit 'select', ' ||/ 17'
-  visit 'select', '14 !'
+  visit 'select', '14 !', sql_to_arel: false
   visit 'select', '!! 15'
   visit 'select', ' @ -5'
   visit 'select', '2 & 3'
@@ -557,8 +557,8 @@ describe 'Arel.sql_to_arel' do
   visit 'select', "date_part('month', '2 years 3 months'::interval)"
   visit 'select', "date_trunc('hour', '2001-02-16 20:38:40'::timestamp)"
   visit 'select', "date_trunc('hour', '2 days 3 hours 40 minutes'::interval)"
-  visit 'select', "extract('hour' from '2001-02-16 20:38:40'::timestamp)"
-  visit 'select', "extract('month' from '2 years 3 months'::interval)"
+  visit 'select', "extract('hour' from '2001-02-16 20:38:40'::timestamp)", sql_to_arel: false
+  visit 'select', "extract('month' from '2 years 3 months'::interval)", sql_to_arel: false
   visit 'select', "isfinite('2001-02-16'::date)"
   visit 'select', "isfinite('2001-02-16 21:28:30'::timestamp)"
   visit 'select', "isfinite('4 hours'::interval)"

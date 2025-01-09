@@ -6,6 +6,8 @@ AllCops:
     - 'tmp/**/*'
   SuggestExtensions: false
 
+  TargetRubyVersion: 3.0
+
 Bundler/OrderedGems:
   Enabled: false
 
